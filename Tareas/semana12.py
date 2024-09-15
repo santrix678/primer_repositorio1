@@ -17,3 +17,5 @@ for i, ciudad in enumerate(ciudades):
         promedio = suma_temperaturas / num_dias
         print(f'  Semana {semana + 1}: Promedio de Temperatura = {promedio:.2f}°C')
     print()  # Línea en blanco para separar los resultados de cada ciudad
+
+    
