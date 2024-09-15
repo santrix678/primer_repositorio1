@@ -1,25 +1,24 @@
+# Definir las ciudades y los días de la semana
+ciudades = ["Quito", "Guayaquil", "Cuenca"]
+dias_semana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
 
-ciudades = ['Ciudad_Loja', 'Ciudad_Machala', 'Ciudad_Quito']
-dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
-semanas = 4  # Supongamos 4 semanas de datos
-# Generar datos de temperaturas aleatorias (en °C) para cada ciudad, día y semana
- np.random.seed(42)  # Para reproducibilidad
-temperaturas = np.random.uniform(15, 35, (len(ciudades), len(dias), semanas))
+# Crear una matriz tridimensional (ciudades x días x semanas)
+# Supongamos que tenemos datos para 2 semanas, y cada día tiene una temperatura aleatoria
+import random
 
-# Inicializar diccionario para almacenar los promedios
-promedios = {ciudad: [] for ciudad in ciudades}
+# Generar datos de temperaturas aleatorios para simplificar el ejemplo
+temperaturas = [[[random.uniform(10.0, 30.0) for dia in range(len(dias_semana))] for semana in range(2)] for ciudad in ciudades]
 
-# Calcular el promedio de temperaturas por semana para cada ciudad utilizando bucles anidados
-for i, ciudad in enumerate(ciudades):
-    for semana in range(semanas):
-        suma_temperaturas = 0
-        for dia in range(len(dias)):
-            suma_temperaturas += temperaturas[i][dia][semana]
-        promedio_semanal = suma_temperaturas / len(dias)
-        promedios[ciudad].append(promedio_semanal)
+# Imprimir los datos de temperaturas
+print("Datos de temperaturas (en °C):")
+for idx_ciudad, ciudad in enumerate(ciudades):
+    for idx_semana, semana in enumerate(temperaturas[idx_ciudad]):
+        print(f"{ciudad}, Semana {idx_semana + 1}: {semana}")
 
-# Mostrar los promedios de temperatura para cada ciudad y semana
-for ciudad, promedios_semanales in promedios.items():
-    print(f"Promedios de temperaturas para {ciudad}:")
-    for semana, promedio in enumerate(promedios_semanales, 1):
-        print(f"  Semana {semana}: {promedio:.2f}°C")
+# Calcular el promedio de temperaturas por semana para cada ciudad
+print("\nPromedios de temperaturas por semana:")
+for idx_ciudad, ciudad in enumerate(ciudades):
+    for idx_semana, semana in enumerate(temperaturas[idx_ciudad]):
+        promedio_semana = sum(semana) / len(semana)
+        print(f"El promedio de temperatura en {ciudad} para la semana {idx_semana + 1} es: {promedio_semana:.2f}°C")
+
